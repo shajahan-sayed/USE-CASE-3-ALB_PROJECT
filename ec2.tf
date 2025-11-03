@@ -22,15 +22,15 @@ resource "aws_instance" "web_page2" {
   }
 }
 
-resource "aws_instance" "web_page2" {
+resource "aws_instance" "web_page3" {
   ami = var.ami_id
   instance_type = var.instance_type
   key_name = var.key_name
-  subnet_id = aws_subnet.subnet_2.id
+  subnet_id = aws_subnet.subnet_3.id
   vpc_security_group_ids = [aws_security_group.alb_security.id]
 
   tags = {
-    Name = "web_page2"
+    Name = "web_page3"
   }
 }
 

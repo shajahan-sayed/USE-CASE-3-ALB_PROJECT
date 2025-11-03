@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "tg_home" {
 }
 
 resource "aws_lb_target_group" "tg_image" {
- Name = "tg-image"
+ name = "tg-image"
  port = 80
  protocol = "HTTP"
  vpc_id = aws_vpc.vpc_alb.id
@@ -48,17 +48,17 @@ resource "aws_lb_target_group" "tg_register" {
 
 #attaching ec2 to target group 
 resource "aws_lb_target_group_attachment" "home" {
- target_group_arn = aws_target_group.tg_home.arn
+ target_group_arn = aws_lb_target_group.tg_home.arn
  target_id = aws_instance.web_page1.id
  port = 80
 }
 resource "aws_lb_target_group_attachment" "image" {
- target_group_arn = aws_target_group.tg_image.arn
+ target_group_arn = aws_lb_target_group.tg_image.arn
  target_id = aws_instance.web_page2.id
  port = 80
 }
 resource "aws_lb_target_group_attachment" "register" {
- target_group_arn = aws_target_group.tg_register.arn
+ target_group_arn = aws_lb_target_group.tg_register.arn
  target_id = aws_instance.web_page3.id
  port = 80
 }

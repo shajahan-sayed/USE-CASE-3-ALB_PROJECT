@@ -63,11 +63,11 @@ resource "aws_vpc" "vpc_alb" {
      route_table_id = aws_route_table.alb_route_table.id
    }
 
-   resourec "aws_route_table_association" "subnet2_asso" {
+   resource "aws_route_table_association" "subnet2_asso" {
      subnet_id = aws_subnet.subnet_2.id
      route_table_id = aws_route_table.alb_route_table.id
    }
-    resourec "aws_route_table_association" "subnet3_asso" {
+    resource "aws_route_table_association" "subnet3_asso" {
      subnet_id = aws_subnet.subnet_3.id
      route_table_id = aws_route_table.alb_route_table.id
    }

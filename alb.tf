@@ -61,4 +61,70 @@ resource "aws_target_group_attachment" "register" {
  target_id = aws_instance.web_page3.id
 }
 
+#creating listerners
+resource "aws_lb_listener_rule" "http_listener" {
+ load_balancer_arn = aws_lb.alb_uc3.arn
+ port = 80
+ protocol = "HTTP"
+
+   default_action {
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Invalid Path"
+      status_code  = "404"
+    }
+  }
+}
+
+#listener rules for path based routing 
+resource "aws_lb_listener_rule" "home_rule" {
+  listener_arn = aws_lb_listener.http_listener.arn
+  priority     = 10
+
+  condition {
+    path_pattern {
+      values = ["/"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_home.arn
+  }
+}
+
+resource "aws_lb_listener_rule" "images_rule" {
+  listener_arn = aws_lb_listener.http_listener.arn
+  priority     = 20
+
+  condition {
+    path_pattern {
+      values = ["/images*"]  # Correct format for subpath routing
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_images.arn
+  }
+}
+
+resource "aws_lb_listener_rule" "register_rule" {
+  listener_arn = aws_lb_listener.http_listener.arn
+  priority     = 30
+
+  condition {
+    path_pattern {
+      values = ["/register*"]  # Correct format for subpath routing
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_register.arn
+  }
+}
+
+
  

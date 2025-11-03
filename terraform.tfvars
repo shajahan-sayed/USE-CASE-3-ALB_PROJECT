@@ -1,6 +1,6 @@
 aws_region = "ap-south-1"
 instance_type = "t2.micro"
-ami_id = ""
+ami_id = "ami-02b8269d5e85954ef"
 key_name = "auto1"
 vpc_cidr_block = "10.0.0.0/16"
 subnet1_cidr_block = "10.0.1.0/24"

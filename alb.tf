@@ -14,7 +14,7 @@ resource "aws_lb" "alb_uc3" {
 }
 
 #creating target group
-resource "aws_target_group" "tg_home" {
+resource "aws_lb_target_group" "tg_home" {
  name = "tg_home"
  port = 80
  protocol = "HTTP"
@@ -25,7 +25,7 @@ resource "aws_target_group" "tg_home" {
  }
 }
 
-resource "aws_target_group" "tg_image" {
+resource "aws_lb_target_group" "tg_image" {
  Name = "tg_image"
  port = 80
  protocol = "HTTP"
@@ -35,7 +35,7 @@ resource "aws_target_group" "tg_image" {
   Name = "tg_image"
  }
 }
-resource "aws_target_group" "tg_register" {
+resource "aws_lb_target_group" "tg_register" {
  name = "tg_register"
  port = 80
  protocol = "HTTP"
@@ -47,22 +47,24 @@ resource "aws_target_group" "tg_register" {
 }
 
 #attaching ec2 to target group 
-resource "aws_target_group_attachment" "home" {
+resource "aws_lb_target_group_attachment" "home" {
  target_group_arn = aws_target_group.tg_home.arn
  target_id = aws_instance.web_page1.id
  port = 80
 }
-resource "aws_target_group_attachment" image" {
+resource "aws_lb_target_group_attachment" "image" {
  target_group_arn = aws_target_group.tg_image.arn
  target_id = aws_instance.web_page2.id
+ port = 80
 }
-resource "aws_target_group_attachment" "register" {
+resource "aws_lb_target_group_attachment" "register" {
  target_group_arn = aws_target_group.tg_register.arn
  target_id = aws_instance.web_page3.id
+ port = 80
 }
 
 #creating listerners
-resource "aws_lb_listener_rule" "http_listener" {
+resource "aws_lb_listener" "http_listener" {
  load_balancer_arn = aws_lb.alb_uc3.arn
  port = 80
  protocol = "HTTP"
@@ -100,13 +102,13 @@ resource "aws_lb_listener_rule" "images_rule" {
 
   condition {
     path_pattern {
-      values = ["/images*"]  # Correct format for subpath routing
+      values = ["/image*"]  # Correct format for subpath routing
     }
   }
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.tg_images.arn
+    target_group_arn = aws_lb_target_group.tg_image.arn
   }
 }
 

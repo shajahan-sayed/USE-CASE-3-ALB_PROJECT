@@ -5,6 +5,7 @@ resource "aws_vpc" "vpc_alb" {
   tags = {
     Name = "vpc_alb"
   }
+}
 
   #creating subnet1
   resource "aws_subnet" "subnet_1" {

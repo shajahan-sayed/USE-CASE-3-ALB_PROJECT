@@ -90,7 +90,7 @@ resource "aws_instance" "web_page3" {
               # Restart nginx and enable it to start on boot
               sudo systemctl restart nginx
               sudo systemctl enable nginx
- 
+  EOF
 
   tags = {
     Name = "web_page3"

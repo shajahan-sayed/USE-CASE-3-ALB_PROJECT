@@ -17,7 +17,7 @@ resource "aws_vpc" "vpc_alb" {
     }
   }
   resource "aws_subnet" "subnet_2" {
-    vpc_id = aws_vpc.vpc_alb
+    vpc_id = aws_vpc.vpc_alb.id
     cidr_block = var.subnet2_cidr_block
 
     tags = {
@@ -25,7 +25,7 @@ resource "aws_vpc" "vpc_alb" {
     }
   }
     resource "aws_subnet" "subnet_3" {
-    vpc_id = aws_vpc.vpc_alb
+    vpc_id = aws_vpc.vpc_alb.id
     cidr_block = var.subnet3_cidr_block
 
     tags = {

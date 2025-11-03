@@ -20,7 +20,7 @@ resource "aws_vpc" "vpc_alb" {
     cidr_block = var.subnet2_cidr_block
 
     tags = {
-      Name = "subnet_2
+      Name = "subnet_2"
     }
   }
     resource "aws_subnet" "subnet_3" {
@@ -28,7 +28,7 @@ resource "aws_vpc" "vpc_alb" {
     cidr_block = var.subnet3_cidr_block
 
     tags = {
-      Name = "subnet_3
+      Name = "subnet_3"
     }
     }
   #creating internet gate way

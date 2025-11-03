@@ -1,3 +1,7 @@
+variable "ami_id" {
+  description : "attaching ami-id to ec2"
+  type = string 
+}
 variable "aws_region" {
   description = "aws region to deply"
   type = string 

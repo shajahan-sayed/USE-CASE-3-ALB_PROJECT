@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "aws region to deply"
   type = string 
-  deafult = "ap-south-1"
+  default = "ap-south-1"
 }
 variable "instance_type" {
   description = "giving instance_type to EC2"

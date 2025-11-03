@@ -9,7 +9,7 @@ resource "aws_vpc" "vpc_alb" {
 
   #creating subnet1
   resource "aws_subnet" "subnet_1" {
-    vpc_id = aws_vpc.vpc_alb
+    vpc_id = aws_vpc.vpc_alb.id
     cidr_block = var.subnet1_cidr_block
 
     tags = {
